@@ -12,3 +12,36 @@
 ![image (6)](https://github.com/user-attachments/assets/c7791d7b-8491-4f54-b4a4-45beb5f90909)
 ![image7](https://github.com/user-attachments/assets/ef7542ba-66ec-4251-bdad-2e2308a519ac)
 
+
+Log Processing
+A folder contains application logs.
+Each log line may have levels: ERROR, INFO, WARNING, DEBUG.
+A Python/Java program continuously reads logs line by line.
+Based on the log type:
+If ERROR, send to Error Logging REST API.
+If WARNING, send to Warning Logging REST API.
+If INFO, send to Info Logging REST API.
+If DEBUG, send to Debug Logging REST API.
+REST API & Storage
+REST APIs are hosted on AWS.
+Logs are stored in a database, which maintains counts of each log type (error, warning, info, debug).
+UI Dashboard
+A UI application queries the database.
+It displays the counts of each log type in real-time.
+Distributed Setup
+Multiple servers will send logs simultaneously.
+The Java program will continuously push logs to REST APIs.
+All components run inside Docker containers.
+Test Automation (Unit Testing Scope)
+Write unit tests for:
+Log file reader (verifying correct classification of log levels).
+API caller (ensuring the correct REST endpoint is hit based on log type).
+Database writer (verifying counts are updated properly).
+UI data fetcher (checking counts match DB values).
+Automation scripts should simulate multiple servers sending logs.
+Tests must validate:
+Correct log segregation.
+Accurate API calls.
+Proper DB updates.
+UI correctly reflects counts.
+
